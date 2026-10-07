@@ -27,14 +27,14 @@ void loop() {
 
   for (int i = 0; i <= 100; i += 2) {
     set_duty(i);
-    for (int i=0; i<5; i++ {
+    for (int j=0; j<10; j++) {
       run_pwm(7);
     }
   }
 
   for (int i = 100; i >= 0; i -=2) {
     set_duty(i);
-    for (int i=0; i<5; i++ {
+    for (int j=0; j<10; j++) {
       run_pwm(7);
     }
   }

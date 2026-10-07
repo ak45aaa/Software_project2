@@ -1,43 +1,45 @@
 int period;
 float duty;
 
-
 void set_period(int p) {
   period = p;
 }
 
 void set_duty(float d) {
-  duty = 1 - d/100.0;
+  duty = 1 - d / 100.0;
 }
 
 void setup() {
   pinMode(7, OUTPUT);
-  set_period(100);
+  set_period(100);   // PWM 한 주기 = 100 us
   set_duty(100);
 }
 
 void run_pwm(int pwm_pin) {
   digitalWrite(pwm_pin, HIGH);
-  delayMicroseconds(period*duty);
+  delayMicroseconds(period * duty);
+
   digitalWrite(pwm_pin, LOW);
-  delayMicroseconds(period-period*duty);
+  delayMicroseconds(period - period * duty);
 }
 
 void loop() {
 
-  for (int i = 0; i <= 100; i += 2) {
-    set_duty(i);
-    for (int i=0; i<50; i++ {
+  // 밝아짐
+  for (int duty_value = 0; duty_value <= 100; duty_value += 2) {
+    set_duty(duty_value);
+
+    for (int j = 0; j < 100; j++) {
       run_pwm(7);
     }
   }
 
-  for (int i = 100; i >= 0; i -=2) {
-    set_duty(i);
-    for (int i=0; i<50; i++ {
+  // 어두워짐
+  for (int duty_value = 100; duty_value >= 0; duty_value -= 2) {
+    set_duty(duty_value);
+
+    for (int j = 0; j < 100; j++) {
       run_pwm(7);
     }
   }
-
-  // period가 10ms면 1초동안 triangle 파형으로 출력하려면 duty가 1씩 올라갈수가 없어서 2씩 올림
 }
