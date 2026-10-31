@@ -45,7 +45,7 @@ float adcToDistance(int adc)
 void setup()
 {
   pinMode(PIN_LED, OUTPUT);
-  digitalWrite(PIN_LED, LOW);  // Assumes HIGH turns the LED on.
+  digitalWrite(PIN_LED, HIGH);  
 
   myservo.attach(PIN_SERVO, _DUTY_MIN, _DUTY_MAX);
   myservo.writeMicroseconds(_DUTY_NEU);
@@ -81,7 +81,7 @@ void loop()
 
   bool in_range = (dist_candidate >= _DIST_MIN
                   && dist_candidate <= _DIST_MAX);
-  digitalWrite(PIN_LED, in_range ? HIGH : LOW);
+  digitalWrite(PIN_LED, in_range ? LOW : HIGH);
   if (in_range)
     dist_prev = dist_candidate;
 
